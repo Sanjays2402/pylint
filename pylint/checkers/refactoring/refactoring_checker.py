@@ -1646,7 +1646,9 @@ class RefactoringChecker(checkers.BaseTokenChecker):
                 continue
             inferred = utils.safe_infer(value.func)
             if not (
-                inferred
+                isinstance(
+                    inferred, (nodes.FunctionDef, nodes.ClassDef, bases.BoundMethod)
+                )
                 and inferred.qname() in CALLS_RETURNING_CONTEXT_MANAGERS
                 and isinstance(assignee, (nodes.AssignName, nodes.AssignAttr))
             ):

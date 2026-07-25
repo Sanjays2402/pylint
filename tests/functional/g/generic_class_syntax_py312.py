@@ -31,3 +31,10 @@ class Parent[_T]:
 class Child[_T](Parent[_T]):
     def func(self):
         self.update_interval = None
+
+
+# Calling a type parameter infers to a TypeVar, which has no qname().
+# https://github.com/pylint-dev/pylint/issues/11058
+type Alias[_U] = None
+
+_ = _U()  # [not-callable]
